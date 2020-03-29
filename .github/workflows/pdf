@@ -1,0 +1,28 @@
+on:
+  push:
+    branches:
+      - master
+
+name: Create PDF
+
+jobs:
+  build:
+    name: Create PDF
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+        
+      - name: Create PDFs
+        uses: scottypate/md-to-pdf@v0.1.1
+        env: {
+          # Use this parameter to determine where the generated .pdf(s) will be stored.
+          PDF_DIR: './pdfs'
+        }
+      
+      - name: Upload Artifact
+        id: upload_artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: pdf
+          path: ./pdfs/doc.pdf
