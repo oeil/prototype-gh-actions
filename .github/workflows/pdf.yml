@@ -15,10 +15,8 @@ jobs:
         
       - name: Create PDFs
         uses: scottypate/md-to-pdf@v0.1.1
-        env: {
-          # Use this parameter to determine where the generated .pdf(s) will be stored.
-          PDF_DIR: './pdfs'
-        }
+        env:
+          PDF_DIR: './pdfs' # Use this parameter to determine where the generated .pdf(s) will be stored.
       
       - name: Upload Artifact
         id: upload_artifact
