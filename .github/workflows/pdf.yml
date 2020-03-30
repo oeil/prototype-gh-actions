@@ -16,7 +16,7 @@ jobs:
       - name: build PDF with pandoc
         uses: docker://pandoc/latex:2.9
         with:
-          args: "--resource-path=.;imgs --standalone --o doc.pdf doc/doc.md"
+          args: "--css https://gist.githubusercontent.com/killercup/5917178/raw/40840de5352083adb2693dc742e9f75dbb18650f/pandoc.css --standalone --o doc.pdf doc/doc.md"
             
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
