@@ -14,20 +14,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@master
         
-      - name: Create PDFs
-        uses: scottypate/md-to-pdf@v0.1.1
-        env: {
-          # Use this parameter to determine where the generated .pdf(s) will be stored.
-          PDF_DIR: './pdfs'
-        }
-      
+      - name: build PDF with pandoc
+        uses: docker://pandoc/latex:2.9
+        with:
+          args: "--standalone --o doc.pdf doc/doc.md"
+
       - name: Upload Artifact
         id: upload_artifact
         uses: actions/upload-artifact@v1
         with:
-          name: pdf
-          path: ./pdfs/doc.pdf
-      
+          name: doc.pdf
+          path: doc.pdf
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@latest
@@ -46,6 +44,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: ./pdfs/doc.pdf
+          asset_path: doc.pdf
           asset_name: doc.pdf
           asset_content_type: application/pdf
