@@ -10,11 +10,19 @@ jobs:
     name: Create PDF
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@master
         
-      - name: build PDF
-        uses: takahashim/review-pdf-generator-action@master
-        
-      - name: upload as Artifacts
-        uses: takahashim/review-pdf-generator-action/upload-artifact@master
+      - name: build PDF with pandoc
+        uses: docker://pandoc/latex:2.9
+        with:
+          args: |
+            --f markdown
+            --t pdf
+            ./doc/doc.md
+            
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: doc.pdf
+          path: ./doc/doc.pdf
