@@ -17,8 +17,8 @@ jobs:
         uses: docker://pandoc/latex:2.9
         with:
           args: |
-            -f markdown
-            -t pdf
+            --from=markdown
+            --to=pdf
             ./doc/doc.md
             
       - name: Upload Artifact
