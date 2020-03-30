@@ -16,7 +16,7 @@ jobs:
       - name: build PDF with pandoc
         uses: docker://pandoc/latex:2.9
         with:
-          args: "--standalone --o doc.pdf doc/doc.md"
+          args: "--standalone --resource-relative-to='file' --o doc.pdf doc/doc.md"
             
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
