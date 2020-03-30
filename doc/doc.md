@@ -1,6 +1,6 @@
 # Documentation Test
 
-![](./imgs/doc.png?raw=true "Title")
+![](imgs/doc.png)
 
 ## Title 1
 Some text here
